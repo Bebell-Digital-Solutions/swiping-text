@@ -1,0 +1,142 @@
+:root {
+	--clr-background: #000;
+	--clr-text: #fff;
+	--clr-slide-1: #967e2d;
+	--clr-slide-2: #967e2d;
+	--clr-slide-3: #967e2d;
+	--clr-slide-4: #967e2d;
+	--clr-slide-5: #967e2d;
+	--clr-slide-6: #967e2d;
+	--clr-slide-7: #967e2d;
+	--item-height: 60px;
+	--total-items: 7;
+	--animation-duration: 14s;
+	--scroll-height: 300px;
+}
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: var(--clr-background);
+	color: var(--clr-text);
+	display: grid;
+	place-content: center;
+	min-height: 100vh;
+	font-family: "Inter", sans-serif;
+}
+
+.container {
+	width: 100%;
+	height: calc(var(--scroll-height) + var(--item-height) - 10px);
+	overflow: hidden;
+	display: flex;
+	padding: calc(var(--scroll-height) / 2) 20px;
+	gap: 20px;
+}
+
+h1 {
+	font-size: 40px;
+	font-weight: 600;
+	text-align: center;
+	color: var(--clr-text);
+	white-space: nowrap;
+}
+
+.scroll-list {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	transform: translateY(calc(var(--item-height) * -2));
+	animation: stepScroll var(--animation-duration) infinite forwards linear;
+}
+
+.scroll-list li {
+	font-size: 40px;
+	font-weight: 600;
+	line-height: 50px;
+	white-space: nowrap;
+	color: var(--clr);
+}
+
+@media (max-width: 768px) {
+	.scroll-list li {
+		font-size: 32px; /* Slightly smaller */
+	}
+}
+
+@media (max-width: 480px) {
+	.scroll-list li {
+		font-size: 24px; /* Fits mobile screens */
+		white-space: normal; /* Allow wrapping if needed */
+		word-break: break-word; /* Prevent overflow */
+		padding: 0 10px; /* Add small padding */
+	}
+}
+
+@keyframes stepScroll {
+	0%,
+	11.90% {
+		transform: translateY(calc(var(--item-height) * -2));
+	}
+	14.28%,
+	26.19% {
+		transform: translateY(calc(var(--item-height) * -3));
+	}
+	28.57%,
+	40.47% {
+		transform: translateY(calc(var(--item-height) * -4));
+	}
+	42.85%,
+	54.76% {
+		transform: translateY(calc(var(--item-height) * -5));
+	}
+	57.14%,
+	69.04% {
+		transform: translateY(calc(var(--item-height) * -6));
+	}
+	71.42%,
+	83.33% {
+		transform: translateY(calc(var(--item-height) * -7));
+	}
+	85.71%,
+	97.62% {
+		transform: translateY(calc(var(--item-height) * -8));
+	}
+	100% {
+		transform: translateY(calc(var(--item-height) * -9));
+	}
+}
+
+.scroll-window {
+	position: relative;
+}
+
+.scroll-window .fade {
+	position: absolute;
+	inset-inline: 0;
+	height: calc(var(--scroll-height) / 2);
+	background: linear-gradient(
+		to bottom,
+		var(--clr-background),
+		rgba(0, 0, 0, 0.5)
+	);
+	z-index: 1;
+	backdrop-filter: saturate(0);
+	pointer-events: none;
+}
+
+.top-fade {
+	top: calc(var(--scroll-height) / 2 * -1);
+}
+
+.bottom-fade {
+	top: 50px;
+	transform: rotate(180deg);
+}
